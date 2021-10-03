@@ -23,3 +23,6 @@ string SetErrorMsgText(string msgText, int code)
 {
 	return msgText + GetErrorMsgText(code);
 }
+void throwError(const char* msg) {
+	throw SetErrorMsgText(msg, WSAGetLastError());
+}

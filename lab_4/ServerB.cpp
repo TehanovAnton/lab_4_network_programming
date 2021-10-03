@@ -14,7 +14,7 @@ int main()
 
 		SOCKADDR_IN sSAddrIn;
 		sSAddrIn.sin_family = AF_INET;
-		sSAddrIn.sin_addr.S_un.S_addr = inet_addr(SERVER_IPV4);
+		sSAddrIn.sin_addr.S_un.S_addr = inet_addr("192.168.0.101");
 		sSAddrIn.sin_port = htons(SERVER_PORT);
 		if (bind(sS, (SOCKADDR*)&sSAddrIn, sizeof(SOCKADDR_IN)) != 0)
 			throw SetErrorMsgText(BIND_MSG_TEXT, WSAGetLastError());
@@ -24,15 +24,15 @@ int main()
 
 		char name[10] = HELLO;
 		SOCKADDR_IN from; 
-		int fromLen;		
+		int fromLen = sizeof(from);		
 		if (GetRequestFromClient(sS, name, SERVER_PORT, (SOCKADDR*)&from, &fromLen))
 		{
 			cout << "Recived msg from: "
 				<< inet_ntoa(from.sin_addr) << ":" << htons(from.sin_port) << "\n\n";			
 
 			if (PutAnswerToClient(sS, name, (SOCKADDR*)&from, &fromLen))
-				cout << "Sent " << inet_ntoa(from.sin_addr) << ":" << htons(from.sin_port) << "/ "
-					<< name;
+				cout << "Sent " << inet_ntoa(from.sin_addr) << ":" << htons(from.sin_port)
+					<< "/ " << name;
 		}
 
 
@@ -40,11 +40,14 @@ int main()
 			throw SetErrorMsgText(CLOSESOCKET_MSG_TEXT, WSAGetLastError());
 
 		if (WSACleanup() != 0)
-			throw SetErrorMsgText(CLOSESOCKET_MSG_TEXT, WSAGetLastError());
+			throw SetErrorMsgText(WSACLEANUP_MSG_TEXT, WSAGetLastError());
 
 	}
 	catch (string errorMsg)
 	{
 		cout << '\n' + errorMsg;
 	}
+
+	system("pause");
+	return 0;
 }

@@ -1,20 +1,49 @@
-﻿// ClientB.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
-//
-
-#include <iostream>
+﻿#include "Header.h"
 
 int main()
 {
-    std::cout << "Hello World!\n";
+	try
+	{
+		cout << "Client start";
+
+		//wsastartup
+		WSADATA wsadata;
+		if (WSAStartup(MAKEWORD(2, 0), &wsadata) != 0)
+			throwError(STARTUP_MSG_TEXT);
+
+		//socket
+		SOCKET cS;
+		if ((cS = socket(AF_INET, SOCK_DGRAM, NULL)) == INVALID_SOCKET)
+			throwError(SOCKET_MSG_TEXT);
+
+		//bind
+		SOCKADDR_IN cSAddrIn;
+		cSAddrIn.sin_family = AF_INET;
+		cSAddrIn.sin_addr.S_un.S_addr = inet_addr(WIRELESS_IPV4);
+		cSAddrIn.sin_port = htons(PORT);
+
+		if (bind(cS, (SOCKADDR*)&cSAddrIn, sizeof(SOCKADDR_IN)) != 0)
+			throw SetErrorMsgText("Bind: ", WSAGetLastError());
+
+		int optval = 1;
+		if (setsockopt(cS, SOL_SOCKET, SO_BROADCAST, (char*)&optval, sizeof(int)) == SOCKET_ERROR)
+			throwError(SOCKOPT_MSG_TEXT);
+
+		//getserver
+		SOCKADDR_IN from;
+		int lenFrom = sizeof(from);
+		char call[10] = HELLO;
+		GetServer(cS, call, PORT, (sockaddr*)&from, &lenFrom);
+		
+		if (closesocket(cS) != 0)
+			throwError(CLOSESOCKET_MSG_TEXT);
+
+		if (WSACleanup() != 0)
+			throwError(WSACLEANUP_MSG_TEXT);
+
+	}
+	catch (string errorMsg)
+	{
+		cout << '\n' + errorMsg;
+	}
 }
-
-// Запуск программы: CTRL+F5 или меню "Отладка" > "Запуск без отладки"
-// Отладка программы: F5 или меню "Отладка" > "Запустить отладку"
-
-// Советы по началу работы 
-//   1. В окне обозревателя решений можно добавлять файлы и управлять ими.
-//   2. В окне Team Explorer можно подключиться к системе управления версиями.
-//   3. В окне "Выходные данные" можно просматривать выходные данные сборки и другие сообщения.
-//   4. В окне "Список ошибок" можно просматривать ошибки.
-//   5. Последовательно выберите пункты меню "Проект" > "Добавить новый элемент", чтобы создать файлы кода, или "Проект" > "Добавить существующий элемент", чтобы добавить в проект существующие файлы кода.
-//   6. Чтобы снова открыть этот проект позже, выберите пункты меню "Файл" > "Открыть" > "Проект" и выберите SLN-файл.

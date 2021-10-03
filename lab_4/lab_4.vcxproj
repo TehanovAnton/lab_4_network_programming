@@ -142,7 +142,7 @@
   <ItemGroup>
     <ClCompile Include="ErrorsHandlers.cpp" />
     <ClCompile Include="GetRequestFromClient.cpp" />
-    <ClCompile Include="lab_4.cpp" />
+    <ClCompile Include="ServerB.cpp" />
     <ClCompile Include="PutAnswerToClient.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -22,5 +22,5 @@ using namespace std;
 string GetErrorMsgText(int code);
 string SetErrorMsgText(string msgText, int code);
 
-bool GetRequestFromClient(SOCKET sS, char* name, short port, sockaddr* from, int* flen);
-bool PutAnswerToClient(SOCKET sS, char* name, sockaddr* to, int* lto);
+bool GetRequestFromClient(char* name, short port, sockaddr* from, int* flen);
+bool PutAnswerToClient(char* name, sockaddr* to, int* lto);

@@ -15,7 +15,7 @@
 #define BIND_MSG_TEXT "Bind: "
 #define RECVFROM_MSG_TEXT "Recvfrom: "
 #define SENDTO_MSG_TEXT "Sendto: "
-#define WIRELESS_IPV4 "192.168.0.106"
+#define WIRELESS_IPV4 "192.168.0.102"
 #define PORT 3000
 #define HELLO "Hello"
 
@@ -25,4 +25,4 @@ string GetErrorMsgText(int code);
 string SetErrorMsgText(string msgText, int code);
 void throwError(const char* msg);
 
-bool GetServer(SOCKET cS, char* call, short port, sockaddr* from, int* lenFrom);
+bool GetServer(char* call, short port, sockaddr* from, int* lenFrom);

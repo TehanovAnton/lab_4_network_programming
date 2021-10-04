@@ -13,7 +13,7 @@
 #define BIND_MSG_TEXT "Bind: "
 #define RECVFROM_MSG_TEXT "Recvfrom: "
 #define SENDTO_MSG_TEXT "Sendto: "
-#define SERVER_IPV4 "127.0.0.1"
+#define SERVER_IPV4 "192.168.0.104"
 #define SERVER_PORT 3000
 #define HELLO "Hello"
 
@@ -22,5 +22,5 @@ using namespace std;
 string GetErrorMsgText(int code);
 string SetErrorMsgText(string msgText, int code);
 
-bool GetRequestFromClient(SOCKET sS, char* name, short port, sockaddr* from, int* flen);
-bool PutAnswerToClient(SOCKET sS, char* name, sockaddr* to, int* lto);
+bool GetRequestFromClient(char* name, short port, sockaddr* from, int* flen);
+bool PutAnswerToClient(char* name, sockaddr* to, int* lto);

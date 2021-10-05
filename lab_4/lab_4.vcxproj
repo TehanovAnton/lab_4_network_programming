@@ -140,6 +140,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="CheckServers.cpp" />
     <ClCompile Include="ErrorsHandlers.cpp" />
     <ClCompile Include="GetRequestFromClient.cpp" />
     <ClCompile Include="ServerB.cpp" />

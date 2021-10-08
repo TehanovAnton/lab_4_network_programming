@@ -11,14 +11,17 @@ int main()
 		SOCKADDR_IN from; 
 		int fromLen;	
 		char name[10] = HELLO;
-		if (GetRequestFromClient(name, SERVER_PORT, (SOCKADDR*)&from, &fromLen))
+		while (true)
 		{
-			cout << "Recived msg from: "
-				<< inet_ntoa(from.sin_addr) << ":" << htons(from.sin_port) << "\n\n";			
+			if (GetRequestFromClient(name, SERVER_PORT, (SOCKADDR*)&from, &fromLen))
+			{
+				cout << "Recived msg from: "
+					<< inet_ntoa(from.sin_addr) << ":" << htons(from.sin_port) << "\n\n";
 
-			if (PutAnswerToClient(name, (SOCKADDR*)&from, &fromLen))
-				cout << "Sent " << inet_ntoa(from.sin_addr) << ":" << htons(from.sin_port)
-					<< "/ " << name;
+				if (PutAnswerToClient(name, (SOCKADDR*)&from, &fromLen))
+					cout << "Sent " << inet_ntoa(from.sin_addr) << ":" << htons(from.sin_port)
+					<< "/ " << name << "\n\n\n";
+			}
 		}
 
 		if (WSACleanup() != 0)

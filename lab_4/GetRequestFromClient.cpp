@@ -17,7 +17,7 @@ bool GetRequestFromClient(char* name, short port, sockaddr* from, int* flen)
 
 	SOCKADDR_IN sSAddrIn;
 	sSAddrIn.sin_family = AF_INET;
-	sSAddrIn.sin_addr.S_un.S_addr = inet_addr(SERVER_IPV4);
+	sSAddrIn.sin_addr.S_un.S_addr = INADDR_ANY;
 	sSAddrIn.sin_port = htons(port);
 	if (bind(sS, (SOCKADDR*)&sSAddrIn, sizeof(SOCKADDR_IN)) != 0)
 		throw SetErrorMsgText(BIND_MSG_TEXT, WSAGetLastError());

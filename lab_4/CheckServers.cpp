@@ -11,7 +11,7 @@ bool CheckServers(char* call, short port, sockaddr* from, int* lenFrom)
 	//bind
 	SOCKADDR_IN cSAddrIn;
 	cSAddrIn.sin_family = AF_INET;
-	cSAddrIn.sin_addr.S_un.S_addr = inet_addr(SERVER_IPV4);
+	cSAddrIn.sin_addr.S_un.S_addr = INADDR_ANY;
 	cSAddrIn.sin_port = htons(SERVER_PORT);
 
 	if (bind(cS, (SOCKADDR*)&cSAddrIn, sizeof(SOCKADDR_IN)) != 0)

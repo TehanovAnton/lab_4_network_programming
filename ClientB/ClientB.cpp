@@ -28,4 +28,8 @@ int main()
 	{
 		cout << '\n' + errorMsg;
 	}
+
+	system("pause");
+
+	return 0;
 }

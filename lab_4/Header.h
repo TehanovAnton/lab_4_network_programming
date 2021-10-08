@@ -14,7 +14,7 @@
 #define SOCKOPT_MSG_TEXT "Sockopt: "
 #define RECVFROM_MSG_TEXT "Recvfrom: "
 #define SENDTO_MSG_TEXT "Sendto: "
-#define SERVER_IPV4 "192.168.0.104"
+#define SERVER_IPV4 "192.168.43.31"
 #define SERVER_PORT 3000
 #define HELLO "Hello"
 

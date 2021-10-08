@@ -4,7 +4,7 @@ int main()
 {
 	try
 	{
-		cout << "Client start";
+		cout << "Client start\n\n";
 
 		//wsastartup
 		WSADATA wsadata;

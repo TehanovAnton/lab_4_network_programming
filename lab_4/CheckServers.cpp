@@ -1,7 +1,7 @@
 #include "Header.h"
 
 
-bool GetServer(char* call, short port, sockaddr* from, int* lenFrom)
+bool CheckServers(char* call, short port, sockaddr* from, int* lenFrom)
 {
 	//socket
 	SOCKET cS;
@@ -11,8 +11,8 @@ bool GetServer(char* call, short port, sockaddr* from, int* lenFrom)
 	//bind
 	SOCKADDR_IN cSAddrIn;
 	cSAddrIn.sin_family = AF_INET;
-	cSAddrIn.sin_addr.S_un.S_addr = inet_addr(WIRELESS_IPV4);
-	cSAddrIn.sin_port = htons(PORT);
+	cSAddrIn.sin_addr.S_un.S_addr = inet_addr(SERVER_IPV4);
+	cSAddrIn.sin_port = htons(SERVER_PORT);
 
 	if (bind(cS, (SOCKADDR*)&cSAddrIn, sizeof(SOCKADDR_IN)) != 0)
 		throw SetErrorMsgText("Bind: ", WSAGetLastError());
@@ -27,17 +27,10 @@ bool GetServer(char* call, short port, sockaddr* from, int* lenFrom)
 	all.sin_family = AF_INET;
 	all.sin_addr.S_un.S_addr = INADDR_BROADCAST;
 	all.sin_port = htons(port);
-					 
+
 	string call_msg = call;
 	if (sendto(cS, call, call_msg.size() + 1, 0, (SOCKADDR*)&all, sizeof(all)) == SOCKET_ERROR)
 		throwError(SENDTO_MSG_TEXT);
-
-	cout << "Me: "
-		<< inet_ntoa(cSAddrIn.sin_addr) << ":" << htons(cSAddrIn.sin_port) << "\n\n";
-
-
-	cout << "Sent message: " << call<< "; "
-		<< inet_ntoa(all.sin_addr) << ":" << htons(all.sin_port) << "\n\n";
 
 	//recvfrom	 
 	SOCKADDR_IN sSAddrIn;
@@ -50,7 +43,7 @@ bool GetServer(char* call, short port, sockaddr* from, int* lenFrom)
 		if (recvfrom(cS, buf, sizeof(buf), 0, (SOCKADDR*)&sSAddrIn, &sizeSSAddrIn) == SOCKET_ERROR)
 			throwError(RECVFROM_MSG_TEXT);
 
-		isCS = strcmp(inet_ntoa(sSAddrIn.sin_addr), WIRELESS_IPV4) == 0;
+		isCS = strcmp(inet_ntoa(sSAddrIn.sin_addr), SERVER_IPV4) == 0;
 	}
 
 	if (res_recvfrom = strcmp(buf, call) == 0)

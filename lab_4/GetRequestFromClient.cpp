@@ -2,6 +2,15 @@
 
 bool GetRequestFromClient(char* name, short port, sockaddr* from, int* flen)
 {
+	SOCKADDR_IN oSAdrIn;
+	int sizeOSAdrIn = sizeof(oSAdrIn);
+	char call[10] = HELLO;
+	if (CheckServers(call, SERVER_PORT, (SOCKADDR*)&oSAdrIn, &sizeOSAdrIn))
+	{
+		cout << "!!!Warning!!! There is another server with the same call: "
+			<< inet_ntoa(oSAdrIn.sin_addr) << ":" << htons(oSAdrIn.sin_port) << "\n\n";
+	}
+
 	SOCKET sS = socket(AF_INET, SOCK_DGRAM, NULL);
 	if (sS == INVALID_SOCKET)
 		throw SetErrorMsgText(SOCKET_MSG_TEXT, WSAGetLastError());
@@ -21,6 +30,7 @@ bool GetRequestFromClient(char* name, short port, sockaddr* from, int* flen)
 	char buf[10] = "";
 	while (true)
 	{
+
 		if (recvfrom(sS, buf, sizeof(buf), 0, (SOCKADDR*)&fSAddrIn, &sizeFSAddrIn) == SOCKET_ERROR)
 			throw SetErrorMsgText(RECVFROM_MSG_TEXT, WSAGetLastError());		
 

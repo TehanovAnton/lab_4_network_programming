@@ -15,7 +15,7 @@
 #define BIND_MSG_TEXT "Bind: "
 #define RECVFROM_MSG_TEXT "Recvfrom: "
 #define SENDTO_MSG_TEXT "Sendto: "
-#define WIRELESS_IPV4 "192.168.0.102"
+#define WIRELESS_IPV4 "192.168.0.104"
 #define PORT 3000
 #define HELLO "Hello"
 

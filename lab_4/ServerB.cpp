@@ -15,7 +15,7 @@ int main()
 		{
 			if (GetRequestFromClient(name, SERVER_PORT, (SOCKADDR*)&from, &fromLen))
 			{
-				cout << "Recived msg from: "
+				cout << "Server recived msg from: "
 					<< inet_ntoa(from.sin_addr) << ":" << htons(from.sin_port) << "\n\n";
 
 				if (PutAnswerToClient(name, (SOCKADDR*)&from, &fromLen))

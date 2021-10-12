@@ -33,7 +33,7 @@ bool CheckServers(char* call, short port, sockaddr* from, int* lenFrom)
 		throwError(SENDTO_MSG_TEXT);
 
 	//recvfrom	 
-	int timeout = 20000;
+	int timeout = 10000;
 	if (setsockopt(cS, SOL_SOCKET, SO_RCVTIMEO, (char*)&timeout, sizeof(int)) == INVALID_SOCKET)
 		throwError("setsockopt");
 
@@ -50,7 +50,10 @@ bool CheckServers(char* call, short port, sockaddr* from, int* lenFrom)
 			break;
 		}
 
-		isCS = strcmp(inet_ntoa(sSAddrIn.sin_addr), SERVER_IPV4) == 0;
+		char* someServer = inet_ntoa(sSAddrIn.sin_addr);
+		char* me = inet_ntoa(cSAddrIn.sin_addr);
+
+		isCS = strcmp(inet_ntoa(sSAddrIn.sin_addr), inet_ntoa(cSAddrIn.sin_addr)) == 0;
 	}
 
 	if (res_recvfrom = strcmp(buf, call) == 0)

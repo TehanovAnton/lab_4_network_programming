@@ -17,12 +17,13 @@ bool GetRequestFromClient(char* name, short port, sockaddr* from, int* flen)
 
 	SOCKADDR_IN sSAddrIn;
 	sSAddrIn.sin_family = AF_INET;
-	sSAddrIn.sin_addr.S_un.S_addr = INADDR_ANY;
+	sSAddrIn.sin_addr.S_un.S_addr = inet_addr(SERVER_IPV4);
+	/*sSAddrIn.sin_addr.S_un.S_addr = INADDR_ANY;*/
 	sSAddrIn.sin_port = htons(port);
 	if (bind(sS, (SOCKADDR*)&sSAddrIn, sizeof(SOCKADDR_IN)) != 0)
 		throw SetErrorMsgText(BIND_MSG_TEXT, WSAGetLastError());
 
-	cout << "Server running => " << inet_ntoa(sSAddrIn.sin_addr) << ":" << htons(sSAddrIn.sin_port) << "\n\n";
+	cout << "Server running\n\n";
 
 	SOCKADDR_IN fSAddrIn;
 	int sizeFSAddrIn = sizeof(sSAddrIn);
@@ -32,7 +33,7 @@ bool GetRequestFromClient(char* name, short port, sockaddr* from, int* flen)
 	{
 
 		if (recvfrom(sS, buf, sizeof(buf), 0, (SOCKADDR*)&fSAddrIn, &sizeFSAddrIn) == SOCKET_ERROR)
-			throw SetErrorMsgText(RECVFROM_MSG_TEXT, WSAGetLastError());		
+			throw SetErrorMsgText(RECVFROM_MSG_TEXT, WSAGetLastError());			
 
 		if (getServName = strcmp(buf, name) == 0)
 		{

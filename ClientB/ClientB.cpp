@@ -16,7 +16,7 @@ int main()
 		int lenFrom;
 		char call[10] = HELLO;
 		if (GetServer(call, PORT, (sockaddr*)&from, &lenFrom))
-			cout << "Recived msg from: "
+			cout << "Client recived msg from: "
 				<< inet_ntoa(from.sin_addr) << ":" << htons(from.sin_port) << "\n\n";
 
 

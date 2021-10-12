@@ -8,15 +8,6 @@ bool GetServer(char* call, short port, sockaddr* from, int* lenFrom)
 	if ((cS = socket(AF_INET, SOCK_DGRAM, NULL)) == INVALID_SOCKET)
 		throwError(SOCKET_MSG_TEXT);
 
-	//bind
-	//SOCKADDR_IN cSAddrIn;
-	//cSAddrIn.sin_family = AF_INET;
-	//cSAddrIn.sin_addr.S_un.S_addr = inet_addr(WIRELESS_IPV4);
-	//cSAddrIn.sin_port = htons(PORT);
-
-	//if (bind(cS, (SOCKADDR*)&cSAddrIn, sizeof(SOCKADDR_IN)) != 0)
-	//	throw SetErrorMsgText("Bind: ", WSAGetLastError());
-
 	//setsockopt
 	int optval = 1;
 	if (setsockopt(cS, SOL_SOCKET, SO_BROADCAST, (char*)&optval, sizeof(int)) == SOCKET_ERROR)

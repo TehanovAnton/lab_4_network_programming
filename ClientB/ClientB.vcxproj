@@ -139,12 +139,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\lab_4\ErrorsHandlers.cpp" />
     <ClCompile Include="ClientB.cpp" />
+    <ClCompile Include="ErrorHandlers.cpp" />
     <ClCompile Include="GetServer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="Defines.h" />
     <ClInclude Include="Header.h" />
+    <ClInclude Include="Libs.h" />
+    <ClInclude Include="Prototypes.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

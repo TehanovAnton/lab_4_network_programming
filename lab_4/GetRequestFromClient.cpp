@@ -2,14 +2,14 @@
 
 bool GetRequestFromClient(char* name, short port, sockaddr* from, int* flen)
 {
-	SOCKADDR_IN oSAdrIn;
+	/*SOCKADDR_IN oSAdrIn;
 	int sizeOSAdrIn = sizeof(oSAdrIn);
 	char call[10] = HELLO;
 	if (CheckServers(call, SERVER_PORT, (SOCKADDR*)&oSAdrIn, &sizeOSAdrIn))
 	{
 		cout << "!!!Warning!!! There is another server with the same call: "
 			<< inet_ntoa(oSAdrIn.sin_addr) << ":" << htons(oSAdrIn.sin_port) << "\n\n";
-	}
+	}*/
 
 	SOCKET sS = socket(AF_INET, SOCK_DGRAM, NULL);
 	if (sS == INVALID_SOCKET)
@@ -17,13 +17,14 @@ bool GetRequestFromClient(char* name, short port, sockaddr* from, int* flen)
 
 	SOCKADDR_IN sSAddrIn;
 	sSAddrIn.sin_family = AF_INET;
-	sSAddrIn.sin_addr.S_un.S_addr = inet_addr(SERVER_IPV4);
-	/*sSAddrIn.sin_addr.S_un.S_addr = INADDR_ANY;*/
+	sSAddrIn.sin_addr.S_un.S_addr = INADDR_ANY;
 	sSAddrIn.sin_port = htons(port);
 	if (bind(sS, (SOCKADDR*)&sSAddrIn, sizeof(SOCKADDR_IN)) != 0)
 		throw SetErrorMsgText(BIND_MSG_TEXT, WSAGetLastError());
 
-	cout << "Server running\n\n";
+	char hostname[50];	int hnlen = sizeof(hostname);
+	GetHostName(hostname, hnlen);
+	cout << "Server running => " << inet_ntoa(sSAddrIn.sin_addr) << ":" << htons(sSAddrIn.sin_port) << "; hostname: " << hostname << '\n';
 
 	SOCKADDR_IN fSAddrIn;
 	int sizeFSAddrIn = sizeof(sSAddrIn);

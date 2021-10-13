@@ -21,10 +21,9 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>16.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{8438ef0b-d705-4a7c-86ed-9c688441af0f}</ProjectGuid>
-    <RootNamespace>lab4</RootNamespace>
+    <ProjectGuid>{64b640dc-bcd8-4ea0-b8a2-4e7eddf8ab5f}</ProjectGuid>
+    <RootNamespace>ClientS</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
-    <ProjectName>ServeB</ProjectName>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
@@ -140,12 +139,10 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="CheckServers.cpp" />
-    <ClCompile Include="ErrorsHandlers.cpp" />
-    <ClCompile Include="GetHostName.cpp" />
-    <ClCompile Include="GetRequestFromClient.cpp" />
-    <ClCompile Include="ServerB.cpp" />
-    <ClCompile Include="PutAnswerToClient.cpp" />
+    <ClCompile Include="..\lab_4\GetServerByName.cpp" />
+    <ClCompile Include="ClientS.cpp" />
+    <ClCompile Include="ErrorHandlers.cpp" />
+    <ClCompile Include="GetServer.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Defines.h" />

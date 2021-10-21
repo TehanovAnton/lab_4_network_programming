@@ -1,0 +1,13 @@
+#define STARTUP_MSG_TEXT "Startup: "
+#define SOCKET_MSG_TEXT "Socket: "
+#define CLOSESOCKET_MSG_TEXT "Closesocket: "
+#define WSACLEANUP_MSG_TEXT "Wsacleanup: "
+#define BIND_MSG_TEXT "Bind: "
+#define SOCKOPT_MSG_TEXT "Sockopt: "
+#define RECVFROM_MSG_TEXT "Recvfrom: "
+#define SENDTO_MSG_TEXT "Sendto: "
+#define GETHOSTBYADDR_MSG_TEXT "Gethostbyaddr: "
+#define GETHOSTNAME_MSG_TEXT "Gethostname: "
+#define SERVER_IPV4 "192.168.43.31"
+#define SERVER_PORT 3000
+#define HELLO "Hello"

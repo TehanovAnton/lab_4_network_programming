@@ -15,12 +15,18 @@ int main()
 		{
 			if (GetRequestFromClient(name, SERVER_PORT, (SOCKADDR*)&from, &fromLen))
 			{
-				cout << "Recived msg from: "
-					<< inet_ntoa(from.sin_addr) << ":" << htons(from.sin_port) << "\n\n";
+				char* fromInetAddr = (char*)&(from.sin_addr);
+				hostent* fromHostent;
+				if ((fromHostent = gethostbyaddr(fromInetAddr, sizeof(fromInetAddr), AF_INET)) == NULL)
+					throwError(GETHOSTBYADDR_MSG_TEXT);
+
+				cout << "Server recived msg from: "
+					<< inet_ntoa(from.sin_addr) << ":" << htons(from.sin_port)
+					<< "; hostname: " << fromHostent->h_name << '\n';
 
 				if (PutAnswerToClient(name, (SOCKADDR*)&from, &fromLen))
 					cout << "Sent " << inet_ntoa(from.sin_addr) << ":" << htons(from.sin_port)
-					<< "/ " << name << "\n\n\n";
+					<< "/ " << name << "\n\n";
 			}
 		}
 
